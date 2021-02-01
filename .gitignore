@@ -340,3 +340,4 @@ ASALocalRun/
 healthchecksdb
 
 /Api/Logs
+Api/appsettings.json
