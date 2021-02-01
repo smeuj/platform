@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Domain.Author">
+    <Position X="14" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAgAAAEAAQAAAAAAAAAAAAAQAQIAAAA=</HashCode>
+      <FileName>Author.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Login" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Messages" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Domain.AuthorInspiration">
+    <Position X="17.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AuthorInspiration.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="InspiredBy" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Domain.DiscordLogin">
+    <Position X="14" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAQAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DiscordAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Domain.Example">
+    <Position X="18.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAACAAgAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Example.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Smeu" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Domain.Inspiration">
+    <Position X="18.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Inspiration.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Smeu" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Domain.Message">
+    <Position X="10.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAiAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAAA=</HashCode>
+      <FileName>Message.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Sender" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Domain.Smeu">
+    <Position X="16.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAkAAAAAAAAAACAAAAAABAQAAEAAA=</HashCode>
+      <FileName>Smeu.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Author" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Examples" />
+      <Property Name="Inspirations" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Domain.TextInspiration">
+    <Position X="20.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TextInspiration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
