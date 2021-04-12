@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nouwan.Smeuj.Api.Handlers;
 using Nouwan.Smeuj.Domain;
@@ -23,6 +24,7 @@ namespace Nouwan.Smeuj.Api.Controllers
 
         // POST api/<MessagesController> 
         [HttpPost]
+        [Authorize]
         public async Task<ObjectResult> Post([FromBody] Message message)
         {
             if (message.IsSaved)

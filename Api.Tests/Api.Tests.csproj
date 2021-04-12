@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<RootNamespace>Nouwan.Smeuj.Api.Tests</RootNamespace>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="5.10.3" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.1" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.2.3" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.2.3" />
+		<PackageReference Include="coverlet.collector" Version="3.0.3">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="NSubstitute" Version="4.2.2" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Api\Api.csproj" />
+	  <ProjectReference Include="..\UnitTests.Common\UnitTests.Common.csproj" />
+	</ItemGroup>
+</Project>

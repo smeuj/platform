@@ -4,7 +4,7 @@ using Nouwan.Smeuj.Framework;
 
 namespace Nouwan.Smeuj.Api.Handlers
 {
-    public class AddMessageRequest:IRequest<Result<Message>>
+    internal class AddMessageRequest:IRequest<Result<Message>>
     {
         public Message Message { get; }
 

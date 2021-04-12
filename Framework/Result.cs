@@ -1,4 +1,6 @@
-﻿namespace Nouwan.Smeuj.Framework
+﻿using System.Text.Json.Serialization;
+
+namespace Nouwan.Smeuj.Framework
 {
     public class Result<T>
     {
@@ -21,6 +23,7 @@
 
         public bool Successful => ResultType != ResultType.NotFound;
         public T? Payload { get; set; }
+        [JsonIgnore]
         public ResultType ResultType { get; set; }
         public bool HasPayload => Payload != null;
     }

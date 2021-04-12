@@ -7,6 +7,7 @@ using FluentAssertions.Execution;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Nouwan.Smeuj.DataAccess.Repositories;
 using Nouwan.Smeuj.Domain;
+using Nouwan.Smeuj.UnitTests.Common;
 
 namespace Nouwan.Smeuj.DataAccess.Tests.Repositories
 {
