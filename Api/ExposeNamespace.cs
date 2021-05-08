@@ -2,7 +2,7 @@
 
 [assembly: InternalsVisibleTo("Api.Tests")]
 // ReSharper disable once EmptyNamespace Used to make internals visible
-namespace Nouwan.Smeuj.Api
+namespace Nouwan.SmeujPlatform.Api
 {
 
 }

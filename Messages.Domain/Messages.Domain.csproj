@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>9.0</LangVersion>
+        <RootNamespace>Nouwan.SmeujPlatform.Messages.Domain</RootNamespace>
+    </PropertyGroup>
+
+</Project>

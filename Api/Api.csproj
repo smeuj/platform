@@ -3,12 +3,9 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>9.0</LangVersion>
-		<RootNamespace>Nouwan.Smeuj.Api</RootNamespace>
+		<RootNamespace>Nouwan.SmeujPlatform.Api</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="FluentMigrator" Version="3.2.15" />
-		<PackageReference Include="FluentMigrator.Runner" Version="3.2.15" />
-		<PackageReference Include="FluentMigrator.Runner.Postgres" Version="3.2.15" />
 		<PackageReference Include="MediatR" Version="9.0.0" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
 		<PackageReference Include="OpenIddict.Validation.AspNetCore" Version="3.0.2" />
@@ -20,7 +17,6 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
-	  <ProjectReference Include="..\Domain\Domain.csproj" />
+	  <ProjectReference Include="..\Messages.Application\Messages.Application.csproj" />
 	</ItemGroup>
 </Project>
