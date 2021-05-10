@@ -23,7 +23,7 @@ namespace Nouwan.SmeujPlatform.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            SmeujPlatform.Messages.Application.ProjectRegistrations.Register(services, Configuration);
+            Messages.Application.ProjectRegistrations.Register(services, Configuration);
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" }); });
             services.AddMediatR(typeof(Startup));

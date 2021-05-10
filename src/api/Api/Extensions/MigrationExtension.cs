@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
@@ -13,14 +15,19 @@ namespace Nouwan.SmeujPlatform.Api.Extensions
         public static void Migrate(this IApplicationBuilder app, ILogger logger)
         {
             using var scope = app.ApplicationServices.CreateScope();
-            var runners = scope.ServiceProvider.GetService<IMigrationRunner[]>();
-
-            if (runners == null || !runners.Any())
+            var runners = scope.ServiceProvider.GetServices<IMigrationRunner>()
+                .ToImmutableArray();
+            
+            if (!runners.Any())
             {
                 logger.LogWarning("No migration runners found. You should probably check your registrations.");
                 return;
             }
 
+            var test = ImmutableList.Create<string>();
+
+            var list = new List<string>();
+            
             Parallel.ForEach(runners, runner =>
             {
                 runner.Processor.BeginTransaction();

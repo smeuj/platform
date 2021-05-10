@@ -16,7 +16,7 @@ namespace Nouwan.SmeujPlatform.Messages.Infrastructure
             services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddFluentMigratorCore().ConfigureRunner(conf =>
                 conf.AddPostgres()
-                    .WithGlobalConnectionString(configuration.GetConnectionString("default"))
+                    .WithGlobalConnectionString(configuration.GetConnectionString(nameof(Message)))
                     .WithMigrationsIn(Assembly.GetAssembly(typeof(InitialMigration))));
         }
     }

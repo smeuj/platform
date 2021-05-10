@@ -17,7 +17,7 @@ namespace Nouwan.SmeujPlatform.Shared.Infrastructure
         private readonly IConfiguration configuration;
         private readonly ILogger<DbConnectionFactory<T>> logger;
 
-        protected DbConnectionFactory(IConfiguration configuration, ILogger<DbConnectionFactory<T>> logger)
+        public DbConnectionFactory(IConfiguration configuration, ILogger<DbConnectionFactory<T>> logger)
         {
             this.configuration = configuration;
             this.logger = logger;
