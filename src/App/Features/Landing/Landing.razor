@@ -1,0 +1,13 @@
+﻿@using Smeuj.Platform.App.Components.Layout
+
+<LayoutView Layout="typeof(MainLayout)">
+    <PageTitle>Home</PageTitle>
+
+    <h1>Dit wordt de homepage!</h1>
+
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <!-- have a button POST a click via AJAX -->
+    <button hx-post="/clicked" hx-swap="outerHTML">
+        Click Me
+    </button>
+</LayoutView>
