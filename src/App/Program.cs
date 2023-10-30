@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Http.HttpResults;
-using Smeuj.Platform.App.Components;
-using Smeuj.Platform.App.Components.Layout;
-using Smeuj.Platform.App.Features.Landing;
+using Smeuj.Platform.App.Features.Search;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +21,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapGet("/", () => new RazorComponentResult<Landing>());
+app.MapGet("/", () => new RazorComponentResult<Home>());
 app.MapPost("/clicked", () => new RazorComponentResult<Test>());
 
 
