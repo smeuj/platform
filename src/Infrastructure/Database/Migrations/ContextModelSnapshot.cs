@@ -48,7 +48,7 @@ namespace Smeuj.Platform.Infrastructure.Database.Migrations
                     b.ToTable("Authors");
                 });
 
-            modelBuilder.Entity("Smeuj.Platform.Domain.SmeujEntry", b =>
+            modelBuilder.Entity("Smeuj.Platform.Domain.Smeu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,12 +63,12 @@ namespace Smeuj.Platform.Infrastructure.Database.Migrations
                     b.Property<DateTimeOffset>("ProcessedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Smeuj")
-                        .IsRequired()
-                        .IsUnicode(true)
+                    b.Property<DateTimeOffset>("SubmittedOn")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("SubmittedOn")
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Version")
@@ -84,13 +84,13 @@ namespace Smeuj.Platform.Infrastructure.Database.Migrations
                     b.HasIndex("DiscordId")
                         .IsUnique();
 
-                    b.HasIndex("Smeuj")
+                    b.HasIndex("Value")
                         .IsUnique();
 
                     b.ToTable("Smeuj");
                 });
 
-            modelBuilder.Entity("Smeuj.Platform.Domain.SmeujEntry", b =>
+            modelBuilder.Entity("Smeuj.Platform.Domain.Smeu", b =>
                 {
                     b.HasOne("Smeuj.Platform.Domain.Author", "Author")
                         .WithMany()

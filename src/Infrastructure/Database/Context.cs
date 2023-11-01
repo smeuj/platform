@@ -9,7 +9,7 @@ public class Context:DbContext {
     
     public DbSet<Author> Authors => Set<Author>();
 
-    public DbSet<SmeujEntry> Smeuj => Set<SmeujEntry>();
+    public DbSet<Smeu> Smeuj => Set<Smeu>();
     
     public Context() {
     }

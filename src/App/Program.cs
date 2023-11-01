@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Http.HttpResults;
-using Smeuj.Platform.App.Features.Search;
+using Smeuj.Platform.App.Features.Home;
 using Smeuj.Platform.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);

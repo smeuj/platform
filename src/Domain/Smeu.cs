@@ -1,11 +1,11 @@
 ﻿namespace Smeuj.Platform.Domain;
 
-public class SmeujEntry(int id, string smeuj, int authorId, ulong discordId,
+public class Smeu(int id, string value, int authorId, ulong discordId,
     DateTimeOffset submittedOn, DateTimeOffset processedOn, int version) {
     
     public int Id { get; private set; } = id;
 
-    public string Smeuj { get; } = smeuj;
+    public string Value { get; } = value;
 
     public int AuthorId { get; } = authorId;
 

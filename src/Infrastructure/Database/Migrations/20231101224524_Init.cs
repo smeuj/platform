@@ -33,7 +33,7 @@ namespace Smeuj.Platform.Infrastructure.Database.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Smeuj = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<string>(type: "TEXT", nullable: false),
                     AuthorId = table.Column<int>(type: "INTEGER", nullable: false),
                     DiscordId = table.Column<ulong>(type: "INTEGER", nullable: false),
                     SubmittedOn = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
@@ -69,9 +69,9 @@ namespace Smeuj.Platform.Infrastructure.Database.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Smeuj_Smeuj",
+                name: "IX_Smeuj_Value",
                 table: "Smeuj",
-                column: "Smeuj",
+                column: "Value",
                 unique: true);
         }
 
