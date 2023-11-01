@@ -12,4 +12,3 @@ assignees: ''
 
 **Acceptance criteria**
 - [ ] List of criteria that should be met to complete this feature
-A clear and concise description of what you want to happen.
