@@ -8,12 +8,12 @@ public static class Module {
 
     public static void RegisterInfrastructure(this IServiceCollection services) {
 
-        services.AddDbContext<Context>();
+        services.AddDbContext<Database.Database>();
     }
 
     public static void MigrateDatabase(this IServiceProvider serviceProvider) {
         using var scope = serviceProvider.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<Context>();
+        var context = scope.ServiceProvider.GetRequiredService<Database.Database>();
         context.Database.Migrate();
     }
 }

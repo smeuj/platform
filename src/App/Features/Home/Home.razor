@@ -1,5 +1,11 @@
 ﻿@using Smeuj.Platform.App.Common.Layout
 
+@code {
+
+    [Parameter]
+    public HomeModel Model { get; set; } = new();
+}
+
 <PageTitle>Smeuj</PageTitle>
 
 <LayoutView Layout="typeof(MainLayout)">
@@ -21,13 +27,7 @@
             </div>
         </form>
     </header>
-    <main>
-
-
+    <main class="max-w-lg mx-auto">
+        <SmeujList Smeuj="Model.Suggestions"></SmeujList>
     </main>
-
-
-    <button hx-post="/clicked" hx-swap="outerHTML">
-        Click Me
-    </button>
 </LayoutView>
