@@ -21,13 +21,12 @@ if (!app.Environment.IsDevelopment()) {
     app.UseHsts();
 }
 app.UseHttpsRedirection();
-app.UseAntiforgery();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapGet("/", async ([FromServices]IHomeHandler home, CancellationToken ct) => await home.GetHomeAsync(ct) );
-app.MapPost("/clicked", () => new RazorComponentResult<Test>());
+app.MapGet("/suggestions", async ([FromServices]IHomeHandler home, CancellationToken ct) => await home.GetSuggestionsAsync(ct));
 
 
 app.Services.MigrateDatabase();
