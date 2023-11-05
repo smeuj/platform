@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        <RootNamespace>Smeuj.Platform.App.Tests</RootNamespace>
+        <AssemblyName>Smeuj.Platform.App.Tests</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoFixture" Version="4.18.0" />
+        <PackageReference Include="FluentAssertions" Version="7.0.0-alpha.3" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0"/>
+        <PackageReference Include="MSTest.TestAdapter" Version="3.0.4"/>
+        <PackageReference Include="MSTest.TestFramework" Version="3.0.4"/>
+        <PackageReference Include="coverlet.collector" Version="6.0.0"/>
+        <PackageReference Include="NSubstitute" Version="5.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\App\App.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\App\App.csproj" />
+    </ItemGroup>
+
+</Project>
