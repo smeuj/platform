@@ -7,7 +7,7 @@ public static class ResultTestExtensions {
     public static TParameter GetParameter<TParameter>(this IResult result) where TParameter : class {
         
         var typed = result as RazorComponentResult;
-        foreach (var parameter in typed.Parameters ?? throw new InvalidOperationException()) {
+        foreach (var parameter in typed?.Parameters ?? throw new InvalidOperationException()) {
             if (parameter.Value is TParameter possibleValue) return possibleValue;
         }
 
