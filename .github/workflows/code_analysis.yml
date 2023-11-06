@@ -50,4 +50,6 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"smeuj_api" /o:"smeuj" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet clean .\src
           dotnet build .\src
+          dotnet test .\src --collect "Code Coverage"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          - name: sonar-quality-gate
