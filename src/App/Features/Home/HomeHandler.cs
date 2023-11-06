@@ -36,7 +36,7 @@ public class HomeHandler : IHomeHandler {
         var suggestions = await CreateSuggestionsAsync(ct);
         logger.LogInformation("GetHomeAsync; Returning {SuggestionCount} suggestions",
             suggestions.Length);
-        
+
         return accessor.IsHtmx()
             ? Components.Suggestions(suggestions)
             : Components.Home(new HomeModel(suggestions));
@@ -54,7 +54,9 @@ public class HomeHandler : IHomeHandler {
         const int offsetCorrection = suggestionCount - 1;
         var smeujCount = await context.Smeuj.CountAsync(ct);
 
-        if (smeujCount == 0) return Array.Empty<Smeu>();
+        if (smeujCount == 0) {
+            return Array.Empty<Smeu>();
+        }
 
         var maxOffset = smeujCount - offsetCorrection;
         var random = new Random();
@@ -66,7 +68,6 @@ public class HomeHandler : IHomeHandler {
     }
 
     private async Task<Smeu[]> SearchAsync(string search, CancellationToken ct) {
-
         var searchTerm = search.ToLowerInvariant();
         var smeuj = await context.Smeuj.Where(s => s.Value.Contains(searchTerm)).ToArrayAsync(ct);
 

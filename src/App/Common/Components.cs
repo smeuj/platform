@@ -14,8 +14,8 @@ public static class Components {
         return new RazorComponentResult<Suggestions>(new{ Value = suggestions});
     }
     
-    public static IResult SmeujList(Smeu[] suggestions) {
-        return new RazorComponentResult<SmeujList>(new{ Smeuj = suggestions});
+    public static IResult SmeujList(Smeu[] smeuj) {
+        return new RazorComponentResult<SmeujList>(new{ Smeuj = smeuj});
     }
 
     public static IResult Search(Smeu[] results) {
