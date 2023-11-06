@@ -6,41 +6,47 @@ using Smeuj.Platform.Infrastructure.Database;
 namespace Smeuj.Platform.App.Features.Home;
 
 public interface IHomeHandler {
-    Task<IResult> GetHomeAsync(CancellationToken ct);
+    Task<IResult> GetHomeAsync(string? search, CancellationToken ct);
 
     Task<IResult> GetSuggestionsAsync(CancellationToken ct);
-
-    Task<IResult> GetSearch(SearchModel model, CancellationToken ct);
 }
 
 public class HomeHandler : IHomeHandler {
     private readonly Database context;
+    private readonly IHttpContextAccessor accessor;
     private readonly ILogger<HomeHandler> logger;
 
-    public HomeHandler(Database context, ILogger<HomeHandler> logger) {
+    public HomeHandler(Database context, IHttpContextAccessor accessor, ILogger<HomeHandler> logger) {
         this.context = context;
+        this.accessor = accessor;
         this.logger = logger;
         logger.LogTrace("HomeHandler;ctor");
     }
 
-    public async Task<IResult> GetHomeAsync(CancellationToken ct) {
-        var suggestions = await CreateSuggestionsAsync(ct);
-        var model = new HomeModel(suggestions);
+    public async Task<IResult> GetHomeAsync(string? search, CancellationToken ct) {
+        if (!string.IsNullOrEmpty(search)) {
+            var searchResults = await SearchAsync(search, ct);
 
-        logger.LogInformation("GetHomeAsync; Returning home with {SuggestionCount} suggestions", suggestions.Length);
-        return Components.Home(model);
+            logger.LogInformation("GetHomeAsync; Found {Count} for search {Search}", searchResults.Length, search);
+            return accessor.IsHtmx()
+                ? Components.Search(searchResults)
+                : Components.Home(new HomeModel(search, searchResults));
+        }
+
+        var suggestions = await CreateSuggestionsAsync(ct);
+        logger.LogInformation("GetHomeAsync; Returning {SuggestionCount} suggestions",
+            suggestions.Length);
+        
+        return accessor.IsHtmx()
+            ? Components.Suggestions(suggestions)
+            : Components.Home(new HomeModel(suggestions));
     }
 
     public async Task<IResult> GetSuggestionsAsync(CancellationToken ct) {
         var suggestions = await CreateSuggestionsAsync(ct);
         logger.LogInformation("GetSuggestionsAsync; Returning suggestions with {SuggestionCount} suggestions",
             suggestions.Length);
-
         return Components.SmeujList(suggestions);
-    }
-
-    public Task<IResult> GetSearch(SearchModel model, CancellationToken ct) {
-        throw new NotImplementedException();
     }
 
     private async Task<Smeu[]> CreateSuggestionsAsync(CancellationToken ct) {
@@ -54,8 +60,15 @@ public class HomeHandler : IHomeHandler {
         var random = new Random();
         var offset = random.Next(0, maxOffset);
         var suggestions = await context.Smeuj.Skip(offset).Take(suggestionCount).ToArrayAsync(ct);
-        
+
         logger.LogDebug("GetHomeAsync; Getting {SuggestionCount} Smeu suggestions from the database", suggestionCount);
         return suggestions.OrderBy(_ => Guid.NewGuid()).ToArray();
+    }
+
+    private async Task<Smeu[]> SearchAsync(string search, CancellationToken ct) {
+        var smeuj = await context.Smeuj.Where(s => s.Value.Contains(search)).ToArrayAsync(ct);
+
+        logger.LogDebug("SearchAsync; Found {Count} for search {Search}", smeuj.Length, search);
+        return smeuj;
     }
 }

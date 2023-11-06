@@ -45,7 +45,7 @@ public class HomeHandlerTests {
         //assert
         var model = result.GetParameter<HomeModel>();
         model.Should().NotBeNull();
-        model.Suggestions.Should().BeEmpty();
+        model.Smeuj.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -60,9 +60,9 @@ public class HomeHandlerTests {
         //assert
         var model = result.GetParameter<HomeModel>();
         model.Should().NotBeNull();
-        model.Suggestions.Should().NotBeEmpty();
-        model.Suggestions.Length.Should().Be(6);
-        model.Suggestions.Should().BeSubsetOf(smeuj);
+        model.Smeuj.Should().NotBeEmpty();
+        model.Smeuj.Length.Should().Be(6);
+        model.Smeuj.Should().BeSubsetOf(smeuj);
     }
 
     [TestMethod]
@@ -79,12 +79,12 @@ public class HomeHandlerTests {
         var model = result1.GetParameter<HomeModel>();
         var model2 = result2.GetParameter<HomeModel>();
         model.Should().NotBeNull();
-        model.Suggestions.Should().NotBeEmpty();
-        model.Suggestions.Length.Should().Be(6);
-        model2.Suggestions.Length.Should().Be(6);
-        model.Suggestions.Should().BeSubsetOf(smeuj);
-        model2.Suggestions.Should().BeSubsetOf(smeuj);
-        model.Suggestions.Should().NotBeEquivalentTo(model2.Suggestions);
+        model.Smeuj.Should().NotBeEmpty();
+        model.Smeuj.Length.Should().Be(6);
+        model2.Smeuj.Length.Should().Be(6);
+        model.Smeuj.Should().BeSubsetOf(smeuj);
+        model2.Smeuj.Should().BeSubsetOf(smeuj);
+        model.Smeuj.Should().NotBeEquivalentTo(model2.Smeuj);
     }
 
     [TestMethod]

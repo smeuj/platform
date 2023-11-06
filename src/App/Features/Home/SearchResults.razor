@@ -1,0 +1,15 @@
+﻿@using Smeuj.Platform.Domain
+
+@code {
+    [Parameter]
+    public Smeu[] Results { get; set; } = Array.Empty<Smeu>();
+}
+
+<div class="flex text-xl mt-6 mb-4 border-b-2 border-dashed pb-1">
+    <h2 class="flex-1 font-extrabold leading-none tracking-tight text-gray-900 align-middle">
+        @Results.Length resultaten
+    </h2>
+</div>
+<div id="smeuj-list">
+    <SmeujList Smeuj="Results"></SmeujList>
+</div>

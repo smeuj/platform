@@ -10,7 +10,15 @@ public static class Components {
         return new RazorComponentResult<Home>(new{ Model = homeModel});
     }
     
+    public static IResult Suggestions(Smeu[] suggestions) {
+        return new RazorComponentResult<Suggestions>(new{ Value = suggestions});
+    }
+    
     public static IResult SmeujList(Smeu[] suggestions) {
         return new RazorComponentResult<SmeujList>(new{ Smeuj = suggestions});
+    }
+
+    public static IResult Search(Smeu[] results) {
+        return new RazorComponentResult<SearchResults>(new { Results = results});
     }
 }

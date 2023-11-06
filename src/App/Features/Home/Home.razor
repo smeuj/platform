@@ -26,14 +26,19 @@
                     </svg>
                 </div>
                 <input name="search" type="search" id="default-search" class="bg-stone-200 block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
-                       placeholder="Zoek een smeuïg woord" data-hx-post="/search" data-hx-trigger="keyup changed delay:500ms from:#default-search"
-                       data-hx-target="#results" data-hx-replace-url="true">
+                       placeholder="Zoek een smeuïg woord" data-hx-get="/" data-hx-trigger="keyup changed delay:500ms from:#default-search"
+                       data-hx-target="#results" data-hx-replace-url="true" value="@Model.Search">
             </div>
         </div>
     </header>
     <main class="max-w-lg mx-auto">
         <div id="results">
-            <Suggestions Value="Model.Suggestions"></Suggestions>
+            @if (Model.IsSearch) {
+                <SearchResults Results="Model.Smeuj"></SearchResults>
+            }
+            else {
+                <Suggestions Value="Model.Smeuj"></Suggestions>
+            }
         </div>
     </main>
 </LayoutView>

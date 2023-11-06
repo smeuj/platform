@@ -9,7 +9,9 @@ builder.Services.RegisterInfrastructure();
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IHomeHandler, HomeHandler>();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {
@@ -23,11 +25,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapGet("/", async ([FromServices] IHomeHandler home, CancellationToken ct) => await home.GetHomeAsync(ct));
+app.MapGet("/",
+    async ([FromServices] IHomeHandler home, [FromQuery] string? search, CancellationToken ct) =>
+    await home.GetHomeAsync(search, ct));
 app.MapGet("/suggestions",
     async ([FromServices] IHomeHandler home, CancellationToken ct) => await home.GetSuggestionsAsync(ct));
-app.MapGet("/search", async ([FromServices] IHomeHandler home, [FromForm] SearchModel model,
-        CancellationToken ct) => await home.GetSearch(model, ct));
 
 
 app.Services.MigrateDatabase();
