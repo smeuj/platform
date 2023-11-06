@@ -66,9 +66,11 @@ public class HomeHandler : IHomeHandler {
     }
 
     private async Task<Smeu[]> SearchAsync(string search, CancellationToken ct) {
-        var smeuj = await context.Smeuj.Where(s => s.Value.Contains(search)).ToArrayAsync(ct);
 
-        logger.LogDebug("SearchAsync; Found {Count} for search {Search}", smeuj.Length, search);
+        var searchTerm = search.ToLowerInvariant();
+        var smeuj = await context.Smeuj.Where(s => s.Value.Contains(searchTerm)).ToArrayAsync(ct);
+
+        logger.LogDebug("SearchAsync; Found {Count} for search {Search}", smeuj.Length, searchTerm);
         return smeuj;
     }
 }
