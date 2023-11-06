@@ -9,6 +9,8 @@ public interface IHomeHandler {
     Task<IResult> GetHomeAsync(CancellationToken ct);
 
     Task<IResult> GetSuggestionsAsync(CancellationToken ct);
+
+    Task<IResult> GetSearch(SearchModel model, CancellationToken ct);
 }
 
 public class HomeHandler : IHomeHandler {
@@ -35,6 +37,10 @@ public class HomeHandler : IHomeHandler {
             suggestions.Length);
 
         return Components.SmeujList(suggestions);
+    }
+
+    public Task<IResult> GetSearch(SearchModel model, CancellationToken ct) {
+        throw new NotImplementedException();
     }
 
     private async Task<Smeu[]> CreateSuggestionsAsync(CancellationToken ct) {
