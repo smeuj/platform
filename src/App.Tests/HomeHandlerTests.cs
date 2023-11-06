@@ -207,12 +207,13 @@ public class HomeHandlerTests {
         suggestions2.Length.Should().Be(6);
         suggestions1.Should().BeSubsetOf(smeuj);
         suggestions2.Should().BeSubsetOf(smeuj);
+        //this can sometimes fail due to the random nature of the suggestions
         suggestions1.Should().NotBeEquivalentTo(suggestions2);
     }
 
     private async Task AddSmeuj(int count = 10) {
         smeuj = fixture.Build<Smeu>()
-            .FromFactory<int>(row => new Smeu( $"smeu{row}",fixture.Create<ulong>(), 
+            .FromFactory<int>(row => new Smeu( $"smeu{row}_{Guid.NewGuid()}",fixture.Create<ulong>(), 
                 DateTimeOffset.Now, DateTimeOffset.Now,0 ) {
                 Author = fixture.Create<Author>()
             })
