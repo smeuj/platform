@@ -2,9 +2,18 @@
 
 namespace Smeuj.Platform.App.Features.Home; 
 
-public class HomeModel(Smeu[] suggestions) {
+public class HomeModel(Smeu[] smeuj) {
+
     public HomeModel():this(Array.Empty<Smeu>()) {
     }
+
+    public HomeModel(string search, Smeu[] searchResults):this(searchResults) {
+        Search = search;
+    }
     
-    public Smeu[] Suggestions { get;} = suggestions;
+    public string? Search { get; }
+    
+    public Smeu[] Smeuj { get;} = smeuj;
+
+    public bool IsSearch => !string.IsNullOrEmpty(Search);
 }

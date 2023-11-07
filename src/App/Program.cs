@@ -1,7 +1,4 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Smeuj.Platform.App;
 using Smeuj.Platform.App.Features.Home;
 using Smeuj.Platform.Infrastructure;
 
@@ -12,7 +9,9 @@ builder.Services.RegisterInfrastructure();
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
-builder.Services.AddScoped<IHomeHandler,HomeHandler>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IHomeHandler, HomeHandler>();
+
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {
@@ -20,13 +19,17 @@ if (!app.Environment.IsDevelopment()) {
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapGet("/", async ([FromServices]IHomeHandler home, CancellationToken ct) => await home.GetHomeAsync(ct) );
-app.MapGet("/suggestions", async ([FromServices]IHomeHandler home, CancellationToken ct) => await home.GetSuggestionsAsync(ct));
+app.MapGet("/",
+    async ([FromServices] IHomeHandler home, [FromQuery] string? search, CancellationToken ct) =>
+    await home.GetHomeAsync(search, ct));
+app.MapGet("/suggestions",
+    async ([FromServices] IHomeHandler home, CancellationToken ct) => await home.GetSuggestionsAsync(ct));
 
 
 app.Services.MigrateDatabase();
