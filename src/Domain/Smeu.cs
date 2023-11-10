@@ -1,13 +1,15 @@
-﻿namespace Smeuj.Platform.Domain;
+﻿
+namespace Smeuj.Platform.Domain;
 
 public class Smeu(string value, ulong discordId,
-    DateTimeOffset submittedOn, DateTimeOffset processedOn, int version) {
+    DateTimeOffset submittedOn, DateTimeOffset processedOn) {
 
     public Smeu(int id, string value, int authorId, ulong discordId,
         DateTimeOffset submittedOn, DateTimeOffset processedOn, int version)
-        :this(value, discordId, submittedOn, processedOn, version) {
+        :this(value, discordId, submittedOn, processedOn) {
         Id = id;
         AuthorId = authorId;
+        Version = version;
     }
     
     public int Id { get; private set; }
@@ -24,6 +26,17 @@ public class Smeu(string value, ulong discordId,
 
     public DateTimeOffset ProcessedOn { get; } = processedOn;
 
-    public int Version { get; private set; } = version;
+    public int Version { get; private set; }
 
+    public ICollection<Inspiration> Inspirations { get; init; } = Array.Empty<Inspiration>();
+
+    public ICollection<Example> Examples { get; init; } = Array.Empty<Example>();
+
+    public void AddInspiration(Inspiration inspiration) {
+        Inspirations.Add(inspiration);
+    }
+
+    public void AddExample(Example example) {
+        Examples.Add(example);
+    }
 }

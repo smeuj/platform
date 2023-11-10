@@ -10,6 +10,10 @@ public class Database:DbContext {
     public DbSet<Author> Authors => Set<Author>();
 
     public DbSet<Smeu> Smeuj => Set<Smeu>();
+
+    public DbSet<Inspiration> Inspirations => Set<Inspiration>();
+
+    public DbSet<Example> Examples => Set<Example>();
     
     public Database() {
     }

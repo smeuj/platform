@@ -214,7 +214,7 @@ public class HomeHandlerTests {
     private async Task AddSmeuj(int count = 10) {
         smeuj = fixture.Build<Smeu>()
             .FromFactory<int>(row => new Smeu( $"smeu{row}_{Guid.NewGuid()}",fixture.Create<ulong>(), 
-                DateTimeOffset.Now, DateTimeOffset.Now,0 ) {
+                DateTimeOffset.Now, DateTimeOffset.Now) {
                 Author = fixture.Create<Author>()
             })
            .CreateMany(count).ToList();
