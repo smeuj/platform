@@ -16,8 +16,16 @@ public class SmeuTypeConfiguration: IEntityTypeConfiguration<Smeu> {
         builder.Property(prop => prop.SubmittedOn).IsRequired();
         builder.Property(prop => prop.ProcessedOn).IsRequired();
         builder.Property(prop => prop.Version).HasDefaultValue(0).IsRowVersion();
+
+        builder.HasMany(smeu => smeu.Examples)
+            .WithOne()
+            .HasForeignKey(example => example.SmeuId).IsRequired();
         
-        builder.HasIndex(prop => prop.Value).IsUnique();
+        builder.HasMany(smeu => smeu.Inspirations)
+            .WithOne()
+            .HasForeignKey(inspiration => inspiration.SmeuId).IsRequired();
+
+        builder.HasIndex(prop => prop.Value);
         builder.HasIndex(prop => prop.DiscordId).IsUnique();
         builder.HasIndex(prop => prop.AuthorId);
     }
