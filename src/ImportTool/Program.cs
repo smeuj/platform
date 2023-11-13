@@ -17,7 +17,7 @@ var channel = await guild.GetTextChannelAsync(0);
 
 var firstMessage = await channel.GetMessageAsync(0);
 var calls = channel.GetMessagesAsync(0, Direction.After, 5000);
-var list = new List<RestMessage>(5001){firstMessage};
+var list = new List<RestMessage>(5001) { firstMessage };
 await foreach (var messages in calls) {
     list.AddRange(messages);
 }
@@ -26,7 +26,6 @@ var sortedMessages = list.OrderBy(row => row.CreatedAt).ToArray();
 foreach (var msg in sortedMessages) {
     if (msg.Author.IsBot) {
         await ParseMessage(msg, context);
-
     }
 }
 
@@ -37,7 +36,7 @@ async Task ParseMessage(IMessage message, Database database) {
     var lines = message.Content.Split("\n");
 
     var smeuString = lines[0].Replace("**", "");
-    
+
     var authorLine = lines.Single(row => row.StartsWith("Genoemd"));
 
     var authorParts = authorLine.Split(" ");
@@ -63,7 +62,7 @@ async Task ParseMessage(IMessage message, Database database) {
         Console.WriteLine("Smeu already exists: " + smeuString + " press any key to continue");
         return;
     }
-    
+
     var smeu = new Smeu(smeuString, message.Id, date, DateTimeOffset.Now) {
         Author = author,
     };
@@ -90,13 +89,15 @@ async Task ParseMessage(IMessage message, Database database) {
         var exampleString = exampleLine.Substring(startExample, endExample).Replace("\"", "");
 
         var startAuthorAndDate = exampleLine.IndexOf('(');
-        var authorAndDate = exampleLine.Substring(startAuthorAndDate, exampleLine.Length - startAuthorAndDate).Split(',');
+        var authorAndDate = exampleLine.Substring(startAuthorAndDate, exampleLine.Length - startAuthorAndDate)
+            .Split(',');
 
         var exampleAuthorString = authorAndDate[1].Replace("(", "");
 
         var exampleAuthor = database.Authors.SingleOrDefault(row => row.PublicName == exampleAuthorString);
         if (author is null) {
-            exampleAuthor = new Author(exampleAuthorString,exampleAuthorString, GetDiscordIdFromUser(), message.Timestamp);
+            exampleAuthor = new Author(exampleAuthorString, exampleAuthorString, GetDiscordIdFromUser(),
+                message.Timestamp);
         }
 
         var exampleDateString = authorAndDate[1].Replace(")", "");
@@ -115,19 +116,19 @@ async Task ParseMessage(IMessage message, Database database) {
         await database.SaveChangesAsync();
     }
     catch (DbUpdateException e) {
-        Console.WriteLine("It seems like Smeu " + smeuString + " already exists in the database. Please check manually and perform corrections press any key to continue");
+        Console.WriteLine("It seems like Smeu " + smeuString +
+                          " already exists in the database. Please check manually and perform corrections press any key to continue");
         Console.ReadKey();
     }
-    
 }
 
-Inspiration GetInspirationFromUser(string inspirationString, DateTimeOffset messageTimestamp){
+Inspiration GetInspirationFromUser(string inspirationString, DateTimeOffset messageTimestamp) {
     Console.WriteLine("Could not find an Author for the following Inspiration: " + inspirationString);
     var type = GetInspirationTypeFromUser();
 
     if (type == InspirationType.Author) {
         return new Inspiration(type, messageTimestamp) {
-            Author = new Author(inspirationString,inspirationString, GetDiscordIdFromUser(), messageTimestamp)
+            Author = new Author(inspirationString, inspirationString, GetDiscordIdFromUser(), messageTimestamp)
         };
     }
 
@@ -155,7 +156,7 @@ InspirationType GetInspirationTypeFromUser() {
             var type = (InspirationType)id;
             return type;
         }
-        
+
         Console.WriteLine("Invalid Input");
     }
 }
@@ -167,10 +168,12 @@ ulong? GetDiscordIdFromUser() {
         var discordId = Console.ReadLine();
 
         if (string.IsNullOrEmpty(discordId)) {
-            
             Console.WriteLine("No Discord Id provided. Do you want to save the author without a Discord Id? y/n");
             var answer = Console.ReadLine();
-            if(answer == "y") return null;
+            if (answer == "y") {
+                return null;
+            }
+
             continue;
         }
 
