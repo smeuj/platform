@@ -5,7 +5,7 @@ public class Example(
     DateTimeOffset submittedOn) {
 
     public Example(int id, string value, DateTimeOffset submittedOn, DateTimeOffset processedOn, int smeuId, int version, 
-        int authorId):this(value, submittedOn) {
+        int? authorId):this(value, submittedOn) {
         Id = id;
         AuthorId = authorId;
         ProcessedOn = processedOn;
@@ -25,7 +25,7 @@ public class Example(
 
     public int Version { get; private set; }
 
-    public int AuthorId { get; }
+    public int? AuthorId { get; }
 
     public Author? Author { get; init; }
 }

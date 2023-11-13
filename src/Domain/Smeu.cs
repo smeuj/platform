@@ -28,9 +28,9 @@ public class Smeu(string value, ulong discordId,
 
     public int Version { get; private set; }
 
-    public ICollection<Inspiration> Inspirations { get; init; } = Array.Empty<Inspiration>();
+    public ICollection<Inspiration> Inspirations { get; init; } = new List<Inspiration>(1);
 
-    public ICollection<Example> Examples { get; init; } = Array.Empty<Example>();
+    public ICollection<Example> Examples { get; init; } = new List<Example>(1);
 
     public void AddInspiration(Inspiration inspiration) {
         Inspirations.Add(inspiration);

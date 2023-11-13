@@ -5,11 +5,12 @@ public class Inspiration(
     DateTimeOffset submittedOn,
     string? value = null) {
 
-    public Inspiration(int id, InspirationType type, DateTimeOffset submittedOn, int smeuId, int? authorId, string? value)
+    public Inspiration(int id, InspirationType type, DateTimeOffset submittedOn, int smeuId, int? authorId, string? value, int version)
         :this(type, submittedOn, value) {
         Id = id;
         SmeuId = smeuId;
         AuthorId = authorId;
+        Version = version;
     }
     
     public int Id { get; private set; }
@@ -27,4 +28,6 @@ public class Inspiration(
     public Author? Author { get; init; }
 
     public string? Value { get; } = value;
+    
+    public int Version { get; private set; }
 }

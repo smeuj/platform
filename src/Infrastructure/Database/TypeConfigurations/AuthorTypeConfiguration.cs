@@ -11,7 +11,8 @@ public class AuthorTypeConfiguration:IEntityTypeConfiguration<Author> {
         builder.HasKey(row => row.Id);
 
         builder.Property(prop => prop.PublicName).IsRequired().HasMaxLength(200);
-        builder.Property(prop => prop.DiscordId).IsRequired();
+        builder.Property(prop => prop.Name).IsRequired().HasMaxLength(400);
+        builder.Property(prop => prop.DiscordId);
         builder.Property(prop => prop.AuthorSince).IsRequired();
         builder.Property(prop => prop.Version).HasDefaultValue(0).IsRowVersion();
         
