@@ -115,7 +115,7 @@ async Task ParseMessage(IMessage message, Database database) {
     try {
         await database.SaveChangesAsync();
     }
-    catch (DbUpdateException e) {
+    catch (DbUpdateException) {
         Console.WriteLine("It seems like Smeu " + smeuString +
                           " already exists in the database. Please check manually and perform corrections press any key to continue");
         Console.ReadKey();
