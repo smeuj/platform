@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#define DEBUG
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Smeuj.Platform.Domain;
 
 namespace Smeuj.Platform.Infrastructure.Database; 
 
-public class Database:DbContext {
-
-    private readonly string? connectionString;
+public class Database:DbContext, IDataProtectionKeyContext {
     
     public DbSet<Author> Authors => Set<Author>();
 
@@ -15,17 +16,32 @@ public class Database:DbContext {
 
     public DbSet<Example> Examples => Set<Example>();
     
-    public Database() {
+    public DbSet<DataProtectionKey> DataProtectionKeys => Set<DataProtectionKey>();
+
+    private readonly DatabaseOptions options = new();
+    
+    //Design time constructor
+    public Database():this("Data Source=SmeujPlatform.db") {
+    }
+    
+    public Database(IConfiguration configuration) {
+        configuration.GetSection(DatabaseOptions.DataProtection).Bind(options);
     }
 
     public Database(string connectionString) {
-        this.connectionString = connectionString;
+        options.ConnectionString = connectionString;
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-        optionsBuilder.UseSqlite(connectionString ?? "Data Source=SmeujPlatform.db");
+        
+        optionsBuilder.UseSqlite(options.ConnectionString);
         optionsBuilder.LogTo(Console.WriteLine);
+        
+        #if(DEBUG)
         optionsBuilder.EnableSensitiveDataLogging();
+        #endif
+        
+        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {

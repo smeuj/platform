@@ -1,17 +1,26 @@
-﻿@inherits LayoutComponentBase
+﻿@using Smeuj.Platform.App.Lib.Version
+@inherits LayoutComponentBase
+@inject VersionOptions VersionOptions
+
 <!DOCTYPE html>
 <html lang="nl">
 
 <head>
     <meta charset="utf-8"/>
+    <meta http-equiv="Content-Security-Policy" 
+          content="base-uri 'self';
+                   default-src 'self';
+                   img-src 'self';
+                   object-src 'none';
+                   script-src 'self';
+                   style-src 'self' 'unsafe-hashes' 'sha256-d7rFBVhb3n/Drrf+EpNWYdITkos3kQRFpB0oSOycXg4=';
+                   upgrade-insecure-requests;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Onze rijke en immer groeiende collectie aan smeuj. Smeuïg tot op de bodem!">
     <base href="/"/>
-    <link async rel="stylesheet" href="css/app.min.css"/>
-    <link async defer rel="stylesheet" href="Smeuj.Platform.App.styles.css"/>
-    <link async defer rel="icon" type="image/png" href="favicon.png"/>
-    <script defer src="/js/htmx.min.js"></script>
-    <script defer src="https://unpkg.com/htmx.org/dist/ext/debug.js"></script>
+    <link async defer rel="stylesheet" href="css/app.min.css?@VersionOptions.CacheBusting"/>
+    <link async defer rel="icon" type="image/png" href="favicon.webp"/>
+    <script defer src="/js/htmx.min.js?@VersionOptions.CacheBusting"></script>
     <HeadOutlet/>
 </head>
 <body class="bg-bleh">
