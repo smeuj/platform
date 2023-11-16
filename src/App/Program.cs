@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Serilog.Events;
@@ -15,8 +17,8 @@ var configuration = new ConfigurationBuilder()
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
-    .WriteTo.File(configuration.GetSection("SeriLog")["Path"] ?? "log.txt", rollingInterval: RollingInterval.Day, 
-        retainedFileTimeLimit:TimeSpan.FromDays(90))
+    .WriteTo.File(configuration.GetSection("SeriLog")["Path"] ?? "log.txt", rollingInterval: RollingInterval.Day,
+        retainedFileTimeLimit: TimeSpan.FromDays(90))
     .MinimumLevel.Is(Enum.Parse<LogEventLevel>(configuration.GetSection("SeriLog")["LogLevel"] ?? "Information"))
     .CreateLogger();
 
@@ -29,6 +31,11 @@ builder.Services.RegisterInfrastructure();
 
 // Add services to the container.
 builder.Services.AddDataProtection()
+    .UseCryptographicAlgorithms(
+        new AuthenticatedEncryptorConfiguration {
+            EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+            ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+        })
     .PersistKeysToDbContext<Database>();
 
 builder.Services.AddAntiforgery();
@@ -52,10 +59,8 @@ if (!app.Environment.IsDevelopment()) {
 }
 
 var cacheMaxTwoMonths = (60 * 60 * 24 * 90).ToString();
-app.UseStaticFiles(new StaticFileOptions
-{
-    OnPrepareResponse = ctx =>
-    {
+app.UseStaticFiles(new StaticFileOptions {
+    OnPrepareResponse = ctx => {
         ctx.Context.Response.Headers.Append(
             "Cache-Control", $"public, max-age={cacheMaxTwoMonths}");
     }
