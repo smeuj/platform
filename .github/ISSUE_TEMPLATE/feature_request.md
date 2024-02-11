@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-**Freature and Reason**
+**Description**
 [Brief description of the feature and the reason for adding it]
 
 **Acceptance criteria**
