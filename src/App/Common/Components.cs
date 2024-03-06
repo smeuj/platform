@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Smeuj.Platform.App.Features.Home;
+using Smeuj.Platform.App.Pages.Home;
 using Smeuj.Platform.Domain;
 
 namespace Smeuj.Platform.App.Common; 

@@ -6,7 +6,7 @@ using Smeuj.Platform.Infrastructure.Database;
 
 Console.WriteLine("Smeu Smokkelaar Import Tool");
 
-var context = new Database();
+var context = new SmeujContext();
 context.Database.Migrate();
 
 var client = new DiscordRestClient();
@@ -31,7 +31,7 @@ foreach (var msg in sortedMessages) {
 
 return;
 
-async Task ParseMessage(IMessage message, Database database) {
+async Task ParseMessage(IMessage message, SmeujContext database) {
     Console.WriteLine("Found message: " + message);
     var lines = message.Content.Split("\n");
 

@@ -10,7 +10,7 @@ using Smeuj.Platform.Infrastructure.Database;
 
 namespace Smeuj.Platform.Infrastructure.Database.Migrations
 {
-    [DbContext(typeof(Database))]
+    [DbContext(typeof(SmeujContext))]
     [Migration("20231111163521_SmeujRemovedUniqueIndex")]
     partial class SmeujRemovedUniqueIndex
     {

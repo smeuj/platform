@@ -6,14 +6,14 @@ namespace Smeuj.Platform.Infrastructure;
 
 public static class Module {
 
-    public static void RegisterInfrastructure(this IServiceCollection services) {
+    public static void AddInfrastructure(this IServiceCollection services) {
 
-        services.AddDbContext<Database.Database>();
+        services.AddDbContext<Database.SmeujContext>();
     }
 
     public static void MigrateDatabase(this IServiceProvider serviceProvider) {
         using var scope = serviceProvider.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<Database.Database>();
+        var context = scope.ServiceProvider.GetRequiredService<Database.SmeujContext>();
         context.Database.Migrate();
     }
 }

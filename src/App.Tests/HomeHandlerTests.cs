@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using Smeuj.Platform.App.Features.Home;
+using Smeuj.Platform.App.Pages.Home;
 using Smeuj.Platform.Domain;
 using Smeuj.Platform.Infrastructure.Database;
 
@@ -15,7 +15,7 @@ public class HomeHandlerTests {
     private readonly ILogger<HomeHandler> mockLogger = Substitute.For<ILogger<HomeHandler>>();
     private readonly IHttpContextAccessor mockAccessor = Substitute.For<IHttpContextAccessor>();
     private HomeHandler homeHandler = null!;
-    private Database context = null!;
+    private SmeujContext context = null!;
     private readonly Fixture fixture = new();
     private List<Smeu> smeuj = new(0);
     private readonly HttpContext httpContext = new DefaultHttpContext();
@@ -25,7 +25,7 @@ public class HomeHandlerTests {
         var testGuid = Guid.NewGuid();
 
         mockAccessor.HttpContext.Returns(httpContext);
-        context = new Database($"Data Source={testGuid}_tests.db");
+        context = new SmeujContext($"Data Source={testGuid}_tests.db");
         context.Database.Migrate();
 
         homeHandler = new HomeHandler(context, mockAccessor, mockLogger);

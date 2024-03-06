@@ -1,25 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Features.Suggestions;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Smeuj.Platform.App.Common;
 using Smeuj.Platform.Domain;
 using Smeuj.Platform.Infrastructure.Database;
 
-namespace Smeuj.Platform.App.Features.Home;
-
-public interface IHomeHandler {
-    Task<IResult> GetHomeAsync(string? search, CancellationToken ct);
-
-    Task<IResult> GetSuggestionsAsync(CancellationToken ct);
-}
+namespace Smeuj.Platform.App.Pages.Home;
 
 public class HomeHandler : IHomeHandler {
-    private readonly Database context;
+    private readonly SmeujContext context;
     private readonly IHttpContextAccessor accessor;
     private readonly ILogger<HomeHandler> logger;
+    private readonly IMediator mediator;
 
-    public HomeHandler(Database context, IHttpContextAccessor accessor, ILogger<HomeHandler> logger) {
+    public HomeHandler(SmeujContext context, IHttpContextAccessor accessor, ILogger<HomeHandler> logger, IMediator mediator) {
         this.context = context;
         this.accessor = accessor;
         this.logger = logger;
+        this.mediator = mediator;
         logger.LogTrace("HomeHandler;ctor");
     }
 
@@ -33,7 +31,7 @@ public class HomeHandler : IHomeHandler {
                 : Components.Home(new HomeModel(search, searchResults));
         }
 
-        var suggestions = await CreateSuggestionsAsync(ct);
+        var suggestions = await mediator.Send(new GetSuggestions(), ct);
         logger.LogInformation("GetHomeAsync; Returning {SuggestionCount} suggestions",
             suggestions.Length);
 
@@ -43,29 +41,13 @@ public class HomeHandler : IHomeHandler {
     }
 
     public async Task<IResult> GetSuggestionsAsync(CancellationToken ct) {
-        var suggestions = await CreateSuggestionsAsync(ct);
+        var suggestions = await mediator.Send(new GetSuggestions(), ct);
         logger.LogInformation("GetSuggestionsAsync; Returning suggestions with {SuggestionCount} suggestions",
             suggestions.Length);
         return Components.SmeujList(suggestions);
     }
 
-    private async Task<Smeu[]> CreateSuggestionsAsync(CancellationToken ct) {
-        const int suggestionCount = 6;
-        const int offsetCorrection = suggestionCount - 1;
-        var smeujCount = await context.Smeuj.CountAsync(ct);
 
-        if (smeujCount == 0) {
-            return Array.Empty<Smeu>();
-        }
-
-        var maxOffset = smeujCount - offsetCorrection;
-        var random = new Random();
-        var offset = random.Next(0, maxOffset);
-        var suggestions = await context.Smeuj.Skip(offset).Take(suggestionCount).ToArrayAsync(ct);
-
-        logger.LogDebug("GetHomeAsync; Getting {SuggestionCount} Smeu suggestions from the database", suggestionCount);
-        return suggestions.OrderBy(_ => Guid.NewGuid()).ToArray();
-    }
 
     private async Task<Smeu[]> SearchAsync(string search, CancellationToken ct) {
         var searchTerm = search.ToLowerInvariant();

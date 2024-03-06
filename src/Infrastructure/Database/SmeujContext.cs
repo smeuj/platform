@@ -3,7 +3,7 @@ using Smeuj.Platform.Domain;
 
 namespace Smeuj.Platform.Infrastructure.Database; 
 
-public class Database:DbContext {
+public class SmeujContext:DbContext {
 
     private readonly string? connectionString;
     
@@ -15,10 +15,10 @@ public class Database:DbContext {
 
     public DbSet<Example> Examples => Set<Example>();
     
-    public Database() {
+    public SmeujContext() {
     }
 
-    public Database(string connectionString) {
+    public SmeujContext(string connectionString) {
         this.connectionString = connectionString;
     }
     
@@ -29,7 +29,7 @@ public class Database:DbContext {
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(Database).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(SmeujContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 }

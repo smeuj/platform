@@ -10,7 +10,7 @@ using Smeuj.Platform.Infrastructure.Database;
 
 namespace Smeuj.Platform.Infrastructure.Database.Migrations
 {
-    [DbContext(typeof(Database))]
+    [DbContext(typeof(SmeujContext))]
     [Migration("20231111145123_Init")]
     partial class Init
     {

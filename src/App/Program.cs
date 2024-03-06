@@ -1,11 +1,13 @@
+using Features;
 using Microsoft.AspNetCore.Mvc;
-using Smeuj.Platform.App.Features.Home;
+using Smeuj.Platform.App.Pages.Home;
 using Smeuj.Platform.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Register services
-builder.Services.RegisterInfrastructure();
+builder.Services.AddInfrastructure();
+builder.Services.AddFeatures();
 
 // Add services to the container.
 builder.Services.AddRazorComponents();
