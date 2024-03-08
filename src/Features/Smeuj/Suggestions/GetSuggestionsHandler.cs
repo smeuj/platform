@@ -5,7 +5,7 @@ using Smeuj.Platform.Domain;
 using Smeuj.Platform.Infrastructure.Database;
 using Smeuj.Platform.Infrastructure.Queries.Smeuj;
 
-namespace Features.Suggestions;
+namespace Features.Smeuj.Suggestions;
 
 public record GetSuggestions : IRequest<Smeu[]>;
 

@@ -1,4 +1,5 @@
-﻿using Features.Suggestions;
+﻿using Features.Smeuj.Search;
+using Features.Smeuj.Suggestions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Smeuj.Platform.App.Common;
@@ -49,11 +50,11 @@ public class HomeHandler : IHomeHandler {
 
 
 
-    private async Task<Smeu[]> SearchAsync(string search, CancellationToken ct) {
-        var searchTerm = search.ToLowerInvariant();
-        var smeuj = await context.Smeuj.Where(s => s.Value.Contains(searchTerm)).ToArrayAsync(ct);
+    private async Task<Smeu[]> SearchAsync(string searchQuery, CancellationToken ct) {
 
-        logger.LogDebug("SearchAsync; Found {Count} for search {Search}", smeuj.Length, searchTerm);
+        var smeuj = await mediator.Send(new SearchSmeujRequest(searchQuery), ct);
+        
+        logger.LogDebug("SearchAsync; Found {Count} for search {Search}", smeuj.Length, searchQuery);
         return smeuj;
     }
 }
