@@ -1,6 +1,6 @@
 ﻿using Smeuj.Platform.Domain;
 
-namespace Smeuj.Platform.App.Features.Home; 
+namespace Smeuj.Platform.App.Pages.Home; 
 
 public class HomeModel(Smeu[] smeuj) {
 

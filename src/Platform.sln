@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{CF82D3C1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportTool", "ImportTool\ImportTool.csproj", "{E8335750-61B0-460C-BB4B-4B4E741AB4B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Features", "Features\Features.csproj", "{1D5DD046-FBE6-44D7-ABF6-79406701057B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{E8335750-61B0-460C-BB4B-4B4E741AB4B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8335750-61B0-460C-BB4B-4B4E741AB4B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8335750-61B0-460C-BB4B-4B4E741AB4B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D5DD046-FBE6-44D7-ABF6-79406701057B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5DD046-FBE6-44D7-ABF6-79406701057B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5DD046-FBE6-44D7-ABF6-79406701057B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5DD046-FBE6-44D7-ABF6-79406701057B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B11B6130-E222-4748-8734-3233A513328A} = {997C91CA-A607-43E9-9CC3-FFF6CE162BFF}

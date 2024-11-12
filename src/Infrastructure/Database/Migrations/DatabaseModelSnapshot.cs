@@ -9,7 +9,7 @@ using Smeuj.Platform.Infrastructure.Database;
 
 namespace Smeuj.Platform.Infrastructure.Database.Migrations
 {
-    [DbContext(typeof(Database))]
+    [DbContext(typeof(SmeujContext))]
     partial class DatabaseModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

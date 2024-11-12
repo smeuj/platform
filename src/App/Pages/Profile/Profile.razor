@@ -1,0 +1,22 @@
+﻿@using System.Security.Claims
+@using Smeuj.Platform.App.Common.Layout
+
+@code {
+
+    [Parameter]
+    public ClaimsPrincipal User { get; set; } = new();
+
+}
+ 
+<PageTitle>Smeuj</PageTitle>
+
+<LayoutView Layout="typeof(MainLayout)">
+    <header class="mt-20">
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl mx-auto text-center">
+            Welkom username
+        </h1>
+    </header>
+    <main class="max-w-lg mx-auto">
+        <div>Logged in</div>
+    </main>
+</LayoutView>
