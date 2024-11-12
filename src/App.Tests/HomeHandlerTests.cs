@@ -1,5 +1,6 @@
 using AutoFixture;
 using FluentAssertions;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -19,6 +20,7 @@ public class HomeHandlerTests {
     private readonly Fixture fixture = new();
     private List<Smeu> smeuj = new(0);
     private readonly HttpContext httpContext = new DefaultHttpContext();
+    private readonly IMediator mediator = Substitute.For<IMediator>();
 
     [TestInitialize]
     public void Init() {
@@ -28,7 +30,7 @@ public class HomeHandlerTests {
         context = new SmeujContext($"Data Source={testGuid}_tests.db");
         context.Database.Migrate();
 
-        homeHandler = new HomeHandler(context, mockAccessor, mockLogger);
+        homeHandler = new HomeHandler(context, mockAccessor, mockLogger, mediator);
     }
 
     [TestCleanup]
