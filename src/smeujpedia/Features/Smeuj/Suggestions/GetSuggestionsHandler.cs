@@ -16,7 +16,7 @@ public class GetSuggestionsHandler(SmeujContext context, ILogger<GetSuggestionsH
         var smeujCount = await context.Smeuj.CountAsync(cancellationToken);
 
         if (smeujCount == 0) {
-            return Array.Empty<Smeu>();
+            return [];
         }
 
         const int suggestionsCount = 6;
