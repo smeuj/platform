@@ -1,10 +1,14 @@
 ﻿<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="compose.yaml" />
+  </Folder>
   <Folder Name="/Tests/">
     <Project Path="App.Tests\App.Tests.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/Tools/">
     <Project Path="ImportTool\ImportTool.csproj" Type="Classic C#" />
   </Folder>
+  <Project Path="Api\Api.csproj" Type="Classic C#" />
   <Project Path="App\App.csproj" Type="Classic C#" />
   <Project Path="Domain\Domain.csproj" Type="Classic C#" />
   <Project Path="Features\Features.csproj" Type="Classic C#" />
