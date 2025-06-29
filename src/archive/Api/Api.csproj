@@ -7,6 +7,8 @@
         <InvariantGlobalization>true</InvariantGlobalization>
         <PublishAot>true</PublishAot>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>Smeuj.Archive.Api</RootNamespace>
+        <AssemblyName>Smeuj.Archive.Api</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,8 +18,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentResults" Version="3.15.2" />
       <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
       <PackageReference Include="Scalar.AspNetCore" Version="2.5.3" />
+      <PackageReference Include="Scrutor" Version="6.1.0" />
     </ItemGroup>
 
 </Project>
